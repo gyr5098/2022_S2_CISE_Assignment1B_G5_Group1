@@ -1,0 +1,23 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gyr5098/1B_test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gyr5098/1B_test/issues"
+  },
+  "homepage": "https://github.com/gyr5098/1B_test#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
