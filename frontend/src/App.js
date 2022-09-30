@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 //import将会把页面放入主界面接口
+//import will put pages in interfaces of main page
 import Home from "./pages/Home";
 import EvidenceList from "./pages/EvidenceList";
 import SubmitArticle from "./pages/Submit-Article"; 
@@ -18,8 +19,12 @@ import SearchingArticle from "./pages/SearchingArticle";
 const App = () =>  {
   
   //(Navlink)是放置菜单的区域。菜单是页面的重要组成部分,菜单的集合定义为导航条如Home，EvidenceList，Analyse an Article，Searching an Article，Submit an Article
+  //(Navlink)is an area used to display menu. Menu is a important component of the webpage, which is intergrated as navigation bar like 
+  //Home，EvidenceList，Analyse an Article，Searching an Article，Submit an Article.
   //route path等于当前路由对象的路径
+  //route path equals the paths of current route objects
   //404 当用户在后方添加了不知名域名或者输入了我们没有的页面时，回弹回404页面
+  //404 reflect to 404 page, when unknown domain names are added by users or trying to access unavailable pages.
     return (
         <Router>
         <div>
