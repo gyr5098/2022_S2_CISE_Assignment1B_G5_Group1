@@ -42,10 +42,10 @@ const App = () =>  {
             
           <div className="content">
             <Route exact path="/" component={Home}/>
+            <Route  path="/SubmitArticle" component={SubmitArticle}/>
             <Route  path="/EvidenceList" component={EvidenceList}/>
             <Route  path="/AnalyseArticle" component={AnalyseArticle}/>
             <Route  path="/ModerateArticle" component={ModerateArticle}/>
-            <Route  path="/SubmitArticle" component={SubmitArticle}/>
             <Route  path="/SearchingArticle" component={SearchingArticle}/>
             <Route exact path="/404" component={NotFoundPage}/>
             <Redirect to="/404" />

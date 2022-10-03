@@ -9,11 +9,14 @@ class CreateArticle extends Component {
     super();
     this.state = {
       title: '',
-      isbn:'',
-      author:'',
-      description:'',
-      published_date:'',
-      publisher:''
+      author: '',
+      source: '',
+      date: '',
+      doi: '',
+      practice: '',
+      claimed: '',
+      evidence: '',
+      state: 'not moderated',
     };
   }
 
@@ -26,53 +29,58 @@ class CreateArticle extends Component {
 
     const data = {
       title: this.state.title,
-      isbn: this.state.isbn,
       author: this.state.author,
-      description: this.state.description,
-      published_date: this.state.published_date,
-      publisher: this.state.publisher
+      source: this.state.source,
+      date: this.state.date,
+      doi: this.state.doi,
+      practice: this.state.practice,
+      claimed: this.state.claimed,
+      evidence: this.state.evidence,
+      state: this.state.state,
     };
 
     axios
-      .post('http://localhost:8082/api/books', data)
+      .post('api/article/', data)
       .then(res => {
         this.setState({
           title: '',
-          isbn:'',
-          author:'',
-          description:'',
-          published_date:'',
-          publisher:''
+          author: '',
+          source: '',
+          date: '',
+          doi: '',
+          practice: '',
+          claimed: '',
+          evidence: '',
         })
         this.props.history.push('/');
       })
       .catch(err => {
-        console.log("Error in CreateBook!");
+        console.log("Error in CreateArticle!");
       })
   };
 
   render() {
     return (
-      <div className="CreateBook">
+      <div className="CreateArticle">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
               <br />
-              <Link to="/" className="btn btn-outline-warning float-left">
-                  Show BooK List
+              <Link to="/EvidenceList" className="btn btn-outline-warning float-left">
+                  Show Article List
               </Link>
             </div>
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Add Book</h1>
+              <h1 className="display-4 text-center">Add Article</h1>
               <p className="lead text-center">
-                  Create new book
+                  Create new article
               </p>
 
               <form noValidate onSubmit={this.onSubmit}>
                 <div className='form-group'>
                   <input
                     type='text'
-                    placeholder='Title of the Book'
+                    placeholder='Title of the Article'
                     name='title'
                     className='form-control'
                     value={this.state.title}
@@ -80,17 +88,6 @@ class CreateArticle extends Component {
                   />
                 </div>
                 <br />
-
-                <div className='form-group'>
-                  <input
-                    type='text'
-                    placeholder='ISBN'
-                    name='isbn'
-                    className='form-control'
-                    value={this.state.isbn}
-                    onChange={this.onChange}
-                  />
-                </div>
 
                 <div className='form-group'>
                   <input
@@ -106,10 +103,10 @@ class CreateArticle extends Component {
                 <div className='form-group'>
                   <input
                     type='text'
-                    placeholder='Describe this book'
-                    name='description'
+                    placeholder='Describe this source'
+                    name='source'
                     className='form-control'
-                    value={this.state.description}
+                    value={this.state.source}
                     onChange={this.onChange}
                   />
                 </div>
@@ -117,20 +114,54 @@ class CreateArticle extends Component {
                 <div className='form-group'>
                   <input
                     type='date'
-                    placeholder='published_date'
-                    name='published_date'
+                    placeholder='date'
+                    name='date'
                     className='form-control'
-                    value={this.state.published_date}
+                    value={this.state.date}
                     onChange={this.onChange}
                   />
                 </div>
+
                 <div className='form-group'>
                   <input
                     type='text'
-                    placeholder='Publisher of this Book'
-                    name='publisher'
+                    placeholder='DOI'
+                    name='doi'
                     className='form-control'
-                    value={this.state.publisher}
+                    value={this.state.doi}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    placeholder='Practice'
+                    name='practice'
+                    className='form-control'
+                    value={this.state.practice}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    placeholder='Claimed'
+                    name='claimed'
+                    className='form-control'
+                    value={this.state.claimed}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    placeholder='Evidence'
+                    name='evidence'
+                    className='form-control'
+                    value={this.state.evidence}
                     onChange={this.onChange}
                   />
                 </div>

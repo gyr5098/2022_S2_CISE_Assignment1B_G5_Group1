@@ -1,13 +1,17 @@
+// show as defalut status
 const SEPractices = [
-    {
-      id: 1,
-      practice: 'TDD',
-    },
-    {
-      id: 2,
-      practice: 'Mob programming',
-    },
-   
-  ];
+  {
+    id: 1,
+    practice: 'Moderated',
+  },
+  {
+    id: 2,
+    practice: 'Not Moderated',
+  },
+  {
+    id: 3,
+    practice: 'Not analysised',
+  },
+];
 
-  export default SEPractices;
+export default SEPractices;

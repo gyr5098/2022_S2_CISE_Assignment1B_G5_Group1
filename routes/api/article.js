@@ -1,61 +1,92 @@
-// routes/api/books.js
+//routes/api/article.js
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-// Load Book model
-const Book = require('../../models/Book');
+//Load Article model
+const Article = require("../../models/Article");
 
-// @route GET api/books/test
-// @description tests books route
+// @route GET api/article/test
+// @description tests article route
 // @access Public
-router.get('/test', (req, res) => res.send('book route testing!'));
+router.get("/test", (req, res) => res.send("article route testing!"));
 
-// @route GET api/books
-// @description Get all books
+// @route GET api/article
+// @description Get all article
 // @access Public
-router.get('/', (req, res) => {
-  Book.find()
-    .then(books => res.json(books))
-    .catch(err => res.status(404).json({ nobooksfound: 'No Books found' }));
+router.get("/", (req, res) => {
+    Article.find()
+        .then((article) => res.json(article))
+        .catch((err) => res.status(404).json({ nobooksfound: "No Matches found" }));
 });
 
-// @route GET api/books/:id
-// @description Get single book by id
+// @route GET api/article
+// @description add/save article
 // @access Public
-router.get('/:id', (req, res) => {
-  Book.findById(req.params.id)
-    .then(book => res.json(book))
-    .catch(err => res.status(404).json({ nobookfound: 'No Book found' }));
+router.post("/", (req, res) => {
+    Article.create(req.body)
+        .then((article) => res.json({ msg: "Added successfully!" }))
+        .catch((err) => res.status(400).json({ error: "Unable to add" }));
 });
 
-// @route GET api/books
-// @description add/save book
+// @route GET api/article/:id
+// @description Delete article by id
 // @access Public
-router.post('/', (req, res) => {
-  Book.create(req.body)
-    .then(book => res.json({ msg: 'Book added successfully' }))
-    .catch(err => res.status(400).json({ error: 'Unable to add this book' }));
+router.delete("/:id", (req, res) => {
+    Article.findByIdAndRemove(req.params.id, req.body)
+        .then((article) => res.json({ mgs: "Deleted successfully!" }))
+        .catch((err) => res.status(404).json({ error: "No such article" }));
 });
 
-// @route GET api/books/:id
-// @description Update book
+// @route GET api/article/:id
+// @description Update article
 // @access Public
-router.put('/:id', (req, res) => {
-  Book.findByIdAndUpdate(req.params.id, req.body)
-    .then(book => res.json({ msg: 'Updated successfully' }))
-    .catch(err =>
-      res.status(400).json({ error: 'Unable to update the Database' })
-    );
+router.put("/:id", (req, res) => {
+    Article.findByIdAndUpdate(req.params.id, req.body)
+        .then((article) => res.json({ msg: "Updated successfully!" }))
+        .catch((err) =>
+            res.status(400).json({ error: "Unable to update the Database" })
+        );
 });
 
-// @route GET api/books/:id
-// @description Delete book by id
+// @route GET api/article/:id
+// @description search artucle by state
 // @access Public
-router.delete('/:id', (req, res) => {
-  Book.findByIdAndRemove(req.params.id, req.body)
-    .then(book => res.json({ mgs: 'Book entry deleted successfully' }))
-    .catch(err => res.status(404).json({ error: 'No such a book' }));
+router.post("/search_article_state", (req, res) => {
+    Article.find({ state: req.body.state })
+        .then((articles) => res.json(articles))
+        .catch((err) => res.status(404).json({ nobooksfound: "No article found" }));
+});
+
+// @route GET api/article/:id
+// @description search artucle by title
+// @access Public
+router.post("/search_article", (req, res) => {
+    Article.find({ title: req.body.title })
+        .then((articles) => res.json(articles))
+        .catch((err) => res.status(404).json({ nobooksfound: "No article found" }));
+});
+
+// @route GET api/article/:id
+// @description moderate article
+// @access Public
+router.post("/moderate/:id", (req, res) => {
+    Article.findByIdAndUpdate(req.params.id, { state: "moderated" })
+        .then((article) => res.json({ msg: "Updated successfully" }))
+        .catch((err) =>
+            res.status(400).json({ error: "Unable to update the Database" })
+        );
+});
+
+// @route GET api/article/:id
+// @description analysis article
+// @access Public
+router.post("/analysis/:id", (req, res) => {
+    Article.findByIdAndUpdate(req.params.id, { state: "analysised" })
+        .then((article) => res.json({ msg: "Updated successfully" }))
+        .catch((err) =>
+            res.status(400).json({ error: "Unable to update the Database" })
+        );
 });
 
 module.exports = router;
